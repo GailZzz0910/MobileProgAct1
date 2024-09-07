@@ -4,7 +4,7 @@ import React from 'react'
 const Dashboard = () => {
     return (
         <View>
-          <Text style={styles.DBoard}>Dashboard</Text>
+          <Text style={styles.DBoard}>Error 404: SOREH GI KAPOY PA ANG GA CODE</Text>
         </View>
       )
     }

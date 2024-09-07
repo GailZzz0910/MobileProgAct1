@@ -189,7 +189,6 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     marginTop: 1,
   },
-  
   inputHalf: {
     width: "48%",
     borderWidth: 1,
@@ -251,7 +250,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginRight: 10,
-    borderRadius: 4,
+    borderRadius: 20,
   },
   checkboxSelected: {
     backgroundColor: "#1F5676",

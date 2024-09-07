@@ -1,21 +1,138 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React from "react";
+import {
+  View,
+  Text,
+  Image,
+  ImageBackground,
+  StyleSheet,
+  TouchableOpacity,
+} from "react-native";
+import { BlurView } from "expo-blur";
+import { useNavigation } from '@react-navigation/native';
 
-const LandingPage = () => {
+const LoginScreen = () => {
+  const navigation = useNavigation();
+
+  const handleCreateAccPress = () => {
+    console.log("Create Account button pressed");
+    navigation.navigate("Registration");
+  };
+
+  const handleSignInPress = () => {
+    console.log("Sign In button pressed");
+    navigation.navigate("Login");
+  };
+
   return (
-    <View>
-      <Text style={styles.LPage}>Landing Page</Text>
-    </View>
-  )
-}
+    <View style={styles.container}>
+      <ImageBackground
+        source={require("../assets/WelcomeBG.png")}
+        style={styles.imageBackground}
+      >
+        <BlurView intensity={120} style={styles.blurContainer}>
 
-export default LandingPage
+          <View style={styles.logoContainer}>
+            <Image
+              source={require("../assets/logo.png")}
+              style={styles.logo}
+              resizeMode="contain"
+            />
+          </View>
+
+          <View style={styles.textContainer}>
+            <Text style={styles.title}>Welcome to your {'\n'}Study Hub!</Text>
+            <Text style={styles.subLabel}>Ready to focus and conquer today's goals? {'\n'}Let's get started!</Text>
+          </View>
+
+          <TouchableOpacity style={styles.CreateAccButton} onPress={handleCreateAccPress}>
+            <Text style={styles.CreateAccText}>Create Account</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.SignInButton} onPress={handleSignInPress}>
+            <Text style={styles.SignInText}>Sign In</Text>
+          </TouchableOpacity>
+
+        </BlurView>
+      </ImageBackground>
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
-    LPage: {
-        textAlign: "center",
-        marginTop: "50%",
-        fontSize: 50,
-        color: "blue" 
-    }    
-})
+  container: {
+    flex: 1,
+  },
+  imageBackground: {
+    flex: 1,
+    resizeMode: "cover",
+  },
+  blurContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  logoContainer: {
+    position: "absolute",
+    top: 40,
+    alignItems: "center",
+    width: "100%",
+  },
+  logo: {
+    position: "absolute",
+    top: 70,
+    width: 220,
+    height: 220,
+  },
+  textContainer: {
+    position: "absolute",
+    top: 380, // Adjust this value to position the text container correctly
+    left: 60, // Aligns textContainer to the left
+    right: 20, // Ensures textContainer doesn't go out of bounds
+    alignItems: "flex-start", // Aligns text to the left within the container
+  },
+  title: {
+    fontWeight: "bold", 
+    fontSize: 35,
+    textAlign: "left",
+  },
+  subLabel: {
+    fontSize: 16,
+    textAlign: "left",
+    marginTop: 10,
+  },
+  CreateAccButton: {
+    width: "70%",
+    height: 50,
+    elevation: 10,
+    backgroundColor: "#1F5676",
+    borderRadius: 30,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 20, // Reduced marginTop to bring the button closer to the SignInButton
+    position: "absolute",
+    top: 550,
+},
+  SignInButton: {
+    width: "70%",
+    height: 50,
+    elevation: 10,
+    borderWidth: 2,
+    borderColor: "#1F5676",
+    borderRadius: 30,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 10, // Reduced marginTop to be close to the CreateAccButton
+    position: "absolute",
+    top: 620,
+},
+  CreateAccText: {
+    color: "white",
+    fontWeight: "bold",
+  },
+  SignInText: {
+    color: "#1F5676",
+    fontWeight: "bold",
+  },
+});
+
+export default LoginScreen;
