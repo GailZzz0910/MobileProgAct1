@@ -13,9 +13,9 @@ export default LandingPage
 
 const styles = StyleSheet.create({
     LPage: {
-        color: "Red",
         textAlign: "center",
         marginTop: "50%",
-        fontSize: 50
-    }
+        fontSize: 50,
+        color: "blue" 
+    }    
 })
