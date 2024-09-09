@@ -29,7 +29,7 @@ const LoginScreen = () => {
         source={require("../assets/WelcomeBG.png")}
         style={styles.imageBackground}
       >
-        <BlurView intensity={150} style={styles.blurContainer}>
+        <BlurView intensity={160} style={styles.blurContainer}>
 
           <View style={styles.logoContainer}>
             <Image
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
   CreateAccButton: {
-    width: "70%",
+    width: "75%",
     height: 50,
     elevation: 10,
     backgroundColor: "#1F5676",
@@ -109,10 +109,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 20, // Reduced marginTop to bring the button closer to the SignInButton
     position: "absolute",
-    top: 690,
+    top: 650,
 },
   SignInButton: {
-    width: "70%",
+    width: "75%",
     height: 50,
     borderWidth: 2,
     borderColor: "#1F5676",
@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 10, // Reduced marginTop to be close to the CreateAccButton
     position: "absolute",
-    top: 770,
+    top: 720,
 },
   CreateAccText: {
     color: "white",
