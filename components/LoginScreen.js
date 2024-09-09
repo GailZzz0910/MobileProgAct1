@@ -21,6 +21,7 @@ const LoginScreen = ({ navigation }) => {
 
   // Function for login button
   const handleLoginPress = () => {
+    navigation.navigate("Dashboard")
     console.log("Login button pressed"); // Ensure this logs to your console
   };
 

@@ -21,6 +21,7 @@ export default function RegisterScreen({ navigation }) {
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false); // Toggle confirm password visibility
 
   const handleContinuePress = () => {
+    navigation.navigate("Dashboard")
     console.log("Continue button pressed");
   };
 
@@ -90,7 +91,7 @@ export default function RegisterScreen({ navigation }) {
                 style={styles.eyeIcon}
               >
                 <Ionicons
-                  name={passwordVisible ? "eye-off" : "eye"}
+                  name={passwordVisible ? "eye" : "eye-off"}
                   size={24}
                   color="#1F5676"
                 />
@@ -112,7 +113,7 @@ export default function RegisterScreen({ navigation }) {
                 style={styles.eyeIcon}
               >
                 <Ionicons
-                  name={confirmPasswordVisible ? "eye-off" : "eye"}
+                  name={confirmPasswordVisible ? "eye" : "eye-off"}
                   size={24}
                   color="#1F5676"
                 />

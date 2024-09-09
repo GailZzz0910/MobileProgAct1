@@ -41,7 +41,7 @@ const LoginScreen = () => {
 
           <View style={styles.textContainer}>
             <Text style={styles.title}>Welcome to your {'\n'}Study Hub!</Text>
-            <Text style={styles.subLabel}>Ready to focus and conquer today's goals? {'\n'}Let's get started!</Text>
+            <Text style={styles.subLabel}>Ready to focus and conquer today's goals?{'\n'}Let's get started!</Text>
           </View>
 
           <TouchableOpacity style={styles.CreateAccButton} onPress={handleCreateAccPress}>
@@ -85,19 +85,19 @@ const styles = StyleSheet.create({
   textContainer: {
     position: "absolute",
     top: 470, // Adjust this value to position the text container correctly
-    left: 80, // Aligns textContainer to the left
+    left: 55, // Aligns textContainer to the left
     right: 20, // Ensures textContainer doesn't go out of bounds
     alignItems: "flex-start", // Aligns text to the left within the container
   },
   title: {
     fontWeight: "bold", 
-    fontSize: 35,
+    fontSize: 38,
     textAlign: "left",
   },
   subLabel: {
-    fontSize: 16,
+    fontSize: 15,
     textAlign: "left",
-    marginTop: 10,
+    marginTop: 4,
   },
   CreateAccButton: {
     width: "70%",
