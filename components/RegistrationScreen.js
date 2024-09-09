@@ -10,10 +10,15 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { BlurView } from "expo-blur";
+import DateTimePicker from "@react-native-community/datetimepicker";
 
 export default function RegisterScreen({ navigation }) {
   const [isSelected, setSelection] = useState(false); // For the checkbox
   const [gender, setGender] = useState(null); // For gender selection
+  const [birthDate, setBirthDate] = useState(new Date()); // For birthdate
+  const [showPicker, setShowPicker] = useState(false); // To control the visibility of the date picker
+  const [passwordVisible, setPasswordVisible] = useState(false); // Toggle password visibility
+  const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false); // Toggle confirm password visibility
 
   const handleContinuePress = () => {
     console.log("Continue button pressed");
@@ -23,54 +28,117 @@ export default function RegisterScreen({ navigation }) {
     navigation.navigate("Login"); // Navigates to the Login screen
   };
 
+  const onDateChange = (event, selectedDate) => {
+    const currentDate = selectedDate || birthDate;
+    setShowPicker(false); // Close picker after selection
+    setBirthDate(currentDate);
+  };
+
   return (
     <ImageBackground
       source={require("../assets/registerBG.jpg")}
-      style={styles.backgroundImage}
+      style={styles.background}
     >
-      <BlurView intensity={160} style={styles.blurView}>
+      <BlurView intensity={160} style={styles.blurContainer}>
         <ScrollView contentContainerStyle={styles.scrollContainer}>
-          <View style={styles.container}>
+          <View style={styles.headerContainer}>
+            <Text style={styles.title}>Create Account</Text>
+            <Text style={styles.subtitle}>Sign up for free!</Text>
+          </View>
 
-            <View style={styles.CreateAccContainer}>
-              <Text style={styles.title}>Create {'\n'}Account</Text>
-              <Text style={styles.subtitle}>Sign up for free!</Text>
-            </View>
-
-            {/* First Name and Last Name Fields */}
+          <View style={styles.formContainer}>
             <View style={styles.row}>
-              <TextInput style={styles.inputHalf} placeholder="First Name" />
-              <TextInput style={styles.inputHalf} placeholder="Last Name" />
+              <TextInput
+                style={styles.inputHalf}
+                placeholder="First Name"
+                placeholderTextColor="rgba(0, 0, 0, 0.5)"
+              />
+              <TextInput
+                style={styles.inputHalf}
+                placeholder="Last Name"
+                placeholderTextColor="rgba(0, 0, 0, 0.5)"
+              />
             </View>
 
-            {/* Email or Mobile Number Field */}
             <TextInput
               style={styles.inputFull}
               placeholder="Email or Mobile Number"
+              placeholderTextColor="rgba(0, 0, 0, 0.5)"
             />
 
-            {/* OTP Field and Send OTP Button */}
             <View style={styles.row}>
-              <TextInput style={styles.inputHalf} placeholder="OTP" />
+              <TextInput
+                style={styles.inputHalf}
+                placeholder="OTP"
+                placeholderTextColor="rgba(0, 0, 0, 0.5)"
+              />
               <TouchableOpacity style={styles.otpButton}>
                 <Text style={styles.otpButtonText}>Send OTP</Text>
               </TouchableOpacity>
             </View>
 
-            {/* Password and Confirm Password Fields */}
-            <TextInput style={styles.inputFull} placeholder="Password" secureTextEntry />
-            <TextInput style={styles.inputFull} placeholder="Confirm Password" secureTextEntry />
-
-            {/* Birthday Selection Fields */}
-            <Text style={styles.BDayLabel}>Birthday</Text>
-            <View style={styles.row}>
-              <TextInput style={styles.inputThird} placeholder="Month" />
-              <TextInput style={styles.inputThird} placeholder="Day" />
-              <TextInput style={styles.inputThird} placeholder="Year" />
+            {/* Password Input */}
+            <View style={styles.passwordContainer}>
+              <TextInput
+                style={styles.inputPassword}
+                placeholder="Password"
+                placeholderTextColor="rgba(0, 0, 0, 0.5)"
+                secureTextEntry={!passwordVisible} // Toggles visibility
+              />
+              <TouchableOpacity
+                onPress={() => setPasswordVisible(!passwordVisible)}
+                style={styles.eyeIcon}
+              >
+                <Ionicons
+                  name={passwordVisible ? "eye-off" : "eye"}
+                  size={24}
+                  color="#1F5676"
+                />
+              </TouchableOpacity>
             </View>
 
-            {/* Gender Selection */}
-            <Text style={styles.GenderLabel}>Gender</Text>
+            {/* Confirm Password Input */}
+            <View style={styles.passwordContainer}>
+              <TextInput
+                style={styles.inputPassword}
+                placeholder="Confirm Password"
+                placeholderTextColor="rgba(0, 0, 0, 0.5)"
+                secureTextEntry={!confirmPasswordVisible} // Toggles visibility
+              />
+              <TouchableOpacity
+                onPress={() =>
+                  setConfirmPasswordVisible(!confirmPasswordVisible)
+                }
+                style={styles.eyeIcon}
+              >
+                <Ionicons
+                  name={confirmPasswordVisible ? "eye-off" : "eye"}
+                  size={24}
+                  color="#1F5676"
+                />
+              </TouchableOpacity>
+            </View>
+
+            <Text style={styles.formContainerText}>Birth Date:</Text>
+            <TouchableOpacity
+              onPress={() => setShowPicker(true)}
+              style={styles.dateButton}
+            >
+              <Text style={styles.dateText}>{birthDate.toDateString()}</Text>
+              <Ionicons name="calendar" size={24} color="#1F5676" />
+            </TouchableOpacity>
+
+            {showPicker && (
+              <DateTimePicker
+                value={birthDate}
+                mode="date"
+                display="default"
+                onChange={onDateChange}
+                maximumDate={new Date()}
+              />
+            )}
+
+            <Text style={styles.formContainerText}>Gender:</Text>
             <View style={styles.row}>
               <TouchableOpacity
                 style={[
@@ -79,7 +147,11 @@ export default function RegisterScreen({ navigation }) {
                 ]}
                 onPress={() => setGender("male")}
               >
-                <Ionicons name="male" size={24} color={gender === "male" ? "white" : "#1F5676"} />
+                <Ionicons
+                  name="male"
+                  size={24}
+                  color={gender === "male" ? "white" : "#1F5676"}
+                />
               </TouchableOpacity>
               <TouchableOpacity
                 style={[
@@ -88,26 +160,36 @@ export default function RegisterScreen({ navigation }) {
                 ]}
                 onPress={() => setGender("female")}
               >
-                <Ionicons name="female" size={24} color={gender === "female" ? "white" : "#1F5676"} />
+                <Ionicons
+                  name="female"
+                  size={24}
+                  color={gender === "female" ? "white" : "#1F5676"}
+                />
               </TouchableOpacity>
             </View>
 
-            {/* Custom Checkbox for Terms of Service */}
             <View style={styles.checkboxContainer}>
               <TouchableOpacity
-                style={[styles.customCheckbox, isSelected && styles.checkboxSelected]}
+                style={[
+                  styles.customCheckbox,
+                  isSelected && styles.checkboxSelected,
+                ]}
                 onPress={() => setSelection(!isSelected)}
               >
-                {isSelected && <Ionicons name="checkmark" size={20} color="white" />}
+                {isSelected && (
+                  <Ionicons name="checkmark" size={20} color="white" />
+                )}
               </TouchableOpacity>
               <Text style={styles.termsText}>
-                I agree to the <Text style={styles.linkText}>Terms of Service</Text>,{" "}
-                <Text style={styles.linkText}>Privacy Policy</Text>, and consent to
-                the use of cookies.
+                I agree to the{" "}
+                <Text style={styles.linkText}>Terms of Service</Text>,{" "}
+                <Text style={styles.linkText}>Privacy Policy</Text>, and consent
+                to the use of cookies.
               </Text>
             </View>
+          </View>
 
-            {/* Continue Button */}
+          <View style={styles.footerContainer}>
             <TouchableOpacity
               style={styles.continueButton}
               onPress={handleContinuePress}
@@ -115,7 +197,6 @@ export default function RegisterScreen({ navigation }) {
               <Text style={styles.continueButtonText}>Continue</Text>
             </TouchableOpacity>
 
-            {/* Sign In Link */}
             <View style={styles.signInAccountContainer}>
               <Text style={styles.signInText}>Already have an account?</Text>
               <TouchableOpacity onPress={handleSignInPress}>
@@ -130,15 +211,14 @@ export default function RegisterScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  backgroundImage: {
+  background: {
     flex: 1,
-    width: "100%",
-    height: "100%",
+    resizeMode: "cover", // Optional: how you want the image to fit
+    justifyContent: "center", // Centers content vertically
+    backgroundColor: "#D9D9D9",
   },
-  blurView: {
+  blurContainer: {
     flex: 1,
-    width: "100%",
-    height: "100%",
     justifyContent: "center", // Centers content vertically
     alignItems: "center", // Centers content horizontally
   },
@@ -148,16 +228,21 @@ const styles = StyleSheet.create({
     alignItems: "center", // Centers content horizontally
     paddingVertical: 20, // Optional padding for better vertical alignment
   },
-  container: {
-    width: "85%", // Explicit width for the container
-    borderRadius: 10,
-    padding: 20,
-    alignItems: "center", // Centers content within the container
+  headerContainer: {
+    width: "85%", // Align with the form width
+    alignSelf: "flex-start", // Align the header text to the left
+    paddingLeft: "10%",
+    marginTop: 55,
   },
-  CreateAccContainer: {
-    alignItems: 'flex-start', // Align children to the start (left edge)
-    width: "100%", // Ensures it takes full width for proper alignment
-    
+  formContainer: {
+    width: "91%", // Make the form take a smaller portion of the width
+    padding: 20,
+    marginTop: 15,
+    marginBottom: 30, // Space between form and footer
+  },
+  footerContainer: {
+    width: "85%",
+    alignItems: "center", // Align the buttons and links
   },
   title: {
     fontSize: 32,
@@ -169,129 +254,149 @@ const styles = StyleSheet.create({
     color: "#666",
     marginBottom: 30,
   },
-
-  BDayLabel:{
-    alignItems: 'flex-start', // Align children to the start (left edge)
-    width: "100%",
-    color:"black"
+  formContainerText: {
+    fontSize: 17,
+    marginLeft: 2,
+    marginBottom: 7,
+    marginTop: -10,
   },
-
-  GenderLabel:{
-    alignItems: 'flex-start', // Align children to the start (left edge)
-    width: "100%",
-    color:"black",
-  },
-
   row: {
     flexDirection: "row",
     justifyContent: "space-between",
     width: "100%",
-    marginBottom: 10,
-    marginTop: 1,
+    marginBottom: 15,
   },
   inputHalf: {
     width: "48%",
     borderWidth: 1,
-    borderColor: "#ccc",
+    borderColor: "#1F5676",
     padding: 10,
     borderRadius: 8,
-    backgroundColor: "white",
+    backgroundColor: "rgba(217, 217, 217, 0.5)", // Set input background color with transparency
   },
   inputFull: {
     width: "100%",
     borderWidth: 1,
-    borderColor: "#ccc",
+    borderColor: "#1F5676",
     padding: 10,
     borderRadius: 8,
-    backgroundColor: "white",
-    marginBottom: 10,
-  },
-  inputThird: {
-    width: "30%",
-    borderWidth: 1,
-    borderColor: "#ccc",
-    padding: 10,
-    borderRadius: 8,
-    backgroundColor: "white",
+    backgroundColor: "rgba(217, 217, 217, 0.5)", // Set input background color with transparency
+    marginBottom: 15,
   },
   otpButton: {
+    width: "48%",
     backgroundColor: "#1F5676",
     padding: 10,
     borderRadius: 8,
-    width: "48%", // Aligns with OTP input
+    justifyContent: "center",
     alignItems: "center",
   },
   otpButtonText: {
     color: "white",
+    fontSize: 16,
     fontWeight: "bold",
   },
-  genderButton: {
-    width: "48%",
-    padding: 15,
+  passwordContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    width: "100%",
     borderWidth: 1,
     borderColor: "#1F5676",
     borderRadius: 8,
+    backgroundColor: "rgba(217, 217, 217, 0.5)",
+    marginBottom: 15,
+    paddingHorizontal: 10,
+  },
+  inputPassword: {
+    flex: 1,
+    padding: 10,
+  },
+  eyeIcon: {
+    paddingHorizontal: 10,
+  },
+  dateButton: {
+    flexDirection: "row",
+    justifyContent: "space-between",
     alignItems: "center",
+    borderWidth: 1,
+    borderColor: "#1F5676",
+    borderRadius: 8,
+    backgroundColor: "rgba(217, 217, 217, 0.5)",
+    padding: 10,
+    marginBottom: 15,
+    width: "100%",
+  },
+  dateText: {
+    color: "rgba(0, 0, 0, 0.5)",
+  },
+  genderButton: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    borderWidth: 1,
+    borderColor: "#1F5676",
+    borderRadius: 8,
+    backgroundColor: "rgba(217, 217, 217, 0.5)",
+    padding: 10,
+    width: "48%",
   },
   genderButtonSelected: {
     backgroundColor: "#1F5676",
   },
   checkboxContainer: {
     flexDirection: "row",
-    marginBottom: 20,
     alignItems: "center",
-    width: "100%",
+    marginBottom: 30,
   },
   customCheckbox: {
     width: 24,
     height: 24,
-    borderWidth: 2,
+    borderWidth: 1,
     borderColor: "#1F5676",
+    borderRadius: 30,
     justifyContent: "center",
     alignItems: "center",
     marginRight: 10,
-    borderRadius: 20,
   },
   checkboxSelected: {
     backgroundColor: "#1F5676",
   },
   termsText: {
-    color: "#333",
-    flexWrap: "wrap",
     flex: 1,
+    fontSize: 14,
+    color: "black",
   },
   linkText: {
     color: "#1F5676",
-    fontWeight: "bold",
+    textDecorationLine: "underline",
   },
   continueButton: {
-    width: "100%",
-    padding: 15,
     backgroundColor: "#1F5676",
+    paddingVertical: 15,
     borderRadius: 8,
+    width: "90%",
     alignItems: "center",
-    marginBottom: 20,
+    borderRadius: 30,
+    elevation: 10,
   },
   continueButtonText: {
     color: "white",
-    fontWeight: "bold",
     fontSize: 16,
+    fontWeight: "bold",
   },
   signInAccountContainer: {
     flexDirection: "row",
-    alignItems: "center",
     justifyContent: "center",
-    marginBottom: 20,
+    marginTop: 20,
   },
   signInText: {
-    fontSize: 14,
+    fontSize: 16,
     color: "#666",
-    textAlign: "center",
+    marginRight: 5,
   },
   loginLink: {
-    fontSize: 14,
+    fontSize: 16,
     color: "#1F5676",
-    marginLeft: 5,
     fontWeight: "bold",
   },
 });

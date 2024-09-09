@@ -29,7 +29,7 @@ const LoginScreen = () => {
         source={require("../assets/WelcomeBG.png")}
         style={styles.imageBackground}
       >
-        <BlurView intensity={120} style={styles.blurContainer}>
+        <BlurView intensity={150} style={styles.blurContainer}>
 
           <View style={styles.logoContainer}>
             <Image
@@ -51,7 +51,6 @@ const LoginScreen = () => {
           <TouchableOpacity style={styles.SignInButton} onPress={handleSignInPress}>
             <Text style={styles.SignInText}>Sign In</Text>
           </TouchableOpacity>
-
         </BlurView>
       </ImageBackground>
     </View>
@@ -79,14 +78,14 @@ const styles = StyleSheet.create({
   },
   logo: {
     position: "absolute",
-    top: 70,
+    top: 100,
     width: 220,
     height: 220,
   },
   textContainer: {
     position: "absolute",
-    top: 380, // Adjust this value to position the text container correctly
-    left: 60, // Aligns textContainer to the left
+    top: 470, // Adjust this value to position the text container correctly
+    left: 80, // Aligns textContainer to the left
     right: 20, // Ensures textContainer doesn't go out of bounds
     alignItems: "flex-start", // Aligns text to the left within the container
   },
@@ -110,12 +109,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 20, // Reduced marginTop to bring the button closer to the SignInButton
     position: "absolute",
-    top: 550,
+    top: 690,
 },
   SignInButton: {
     width: "70%",
     height: 50,
-    elevation: 10,
     borderWidth: 2,
     borderColor: "#1F5676",
     borderRadius: 30,
@@ -123,15 +121,17 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 10, // Reduced marginTop to be close to the CreateAccButton
     position: "absolute",
-    top: 620,
+    top: 770,
 },
   CreateAccText: {
     color: "white",
     fontWeight: "bold",
+    fontSize: 18,
   },
   SignInText: {
     color: "#1F5676",
     fontWeight: "bold",
+    fontSize: 18,
   },
 });
 

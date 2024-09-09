@@ -7,7 +7,6 @@ import {
   ImageBackground,
   TouchableOpacity,
   StyleSheet,
-  StatusBar,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { BlurView } from "expo-blur";
@@ -113,7 +112,6 @@ const LoginScreen = ({ navigation }) => {
           </TouchableOpacity>
         </View>
       </BlurView>
-      <StatusBar style="light" />
     </ImageBackground>
   );
 };
