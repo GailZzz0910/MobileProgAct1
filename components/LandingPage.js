@@ -60,6 +60,7 @@ const LoginScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    color: "#D9D9D9",
   },
   imageBackground: {
     flex: 1,
@@ -69,6 +70,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "rgba(219, 217, 220, 0.4)",
   },
   logoContainer: {
     position: "absolute",
@@ -78,20 +80,20 @@ const styles = StyleSheet.create({
   },
   logo: {
     position: "absolute",
-    top: 100,
+    top: 120,
     width: 220,
     height: 220,
   },
   textContainer: {
     position: "absolute",
-    top: 470, // Adjust this value to position the text container correctly
-    left: 55, // Aligns textContainer to the left
-    right: 20, // Ensures textContainer doesn't go out of bounds
-    alignItems: "flex-start", // Aligns text to the left within the container
+    top: 520,
+    left: 80,
+    right: 20,
+    alignItems: "flex-start",
   },
   title: {
     fontWeight: "bold", 
-    fontSize: 38,
+    fontSize: 42,
     textAlign: "left",
   },
   subLabel: {
@@ -100,38 +102,36 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
   CreateAccButton: {
-    width: "75%",
+    width: "70%",
     height: 50,
     elevation: 10,
     backgroundColor: "#1F5676",
     borderRadius: 30,
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 20, // Reduced marginTop to bring the button closer to the SignInButton
     position: "absolute",
-    top: 650,
+    top: 740,
 },
   SignInButton: {
-    width: "75%",
+    width: "70%",
     height: 50,
     borderWidth: 2,
     borderColor: "#1F5676",
     borderRadius: 30,
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 10, // Reduced marginTop to be close to the CreateAccButton
     position: "absolute",
-    top: 720,
+    top: 805,
 },
   CreateAccText: {
     color: "white",
     fontWeight: "bold",
-    fontSize: 18,
+    fontSize: 17,
   },
   SignInText: {
     color: "#1F5676",
     fontWeight: "bold",
-    fontSize: 18,
+    fontSize: 17,
   },
 });
 
