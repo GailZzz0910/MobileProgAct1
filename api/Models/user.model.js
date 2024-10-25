@@ -23,7 +23,7 @@ const userSchema = new mongoose.Schema({
     },
     gender: {
         type: String,
-        enum: ['male', 'female', 'Male', 'Female'], // Allow both lowercase and uppercase
+        enum: ['male', 'female', 'Male', 'Female'], 
         required: true,
     },    
     lastLogin: {
@@ -40,7 +40,7 @@ const userSchema = new mongoose.Schema({
     verificationTokenExpiresAt: Date,
 }, { timestamps: true });
 
-// Export the model
+// Export the model para ma gamet sa laen na file
 const User = mongoose.model('User', userSchema);
 
 export default User;

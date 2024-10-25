@@ -5,10 +5,11 @@ export const generateTokenAndSetCookie = (res, userId) => {
         expiresIn: "3d",
     });
 
+    //implementation for IAS 
 res.cookie("token", token, {
     httpOnly: true, // cookie cannot be access by client side js also prevents attack called XSS
     secure: process.env.NODE_ENV === "production", // only accessible in production (https)
-    sameSite: "strict", //prevents an attack called csrf
+    sameSite: "strict", //prevents an attack called csrf 
     maxAge: 3 * 24 * 60 * 60 * 1000,
 });
 

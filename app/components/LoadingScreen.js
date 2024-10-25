@@ -7,12 +7,12 @@ const LoadingScreen = () => {
     const navigation = useNavigation();
   
     useEffect(() => {
-      // Simulate a task or data fetch
+      // Simulate a task or data fetch (pero char2 pane kai wapamai i fetch na data so change upon requiremnts)
       const loadData = async () => {
         setTimeout(() => {
-          setLoading(false); // Stop loading after the task is done
-          navigation.replace('LandingPage'); // Navigate to LandingPage
-        }, 4000); // Mocking a delay of 4 seconds
+          setLoading(false); 
+          navigation.replace('LandingPage'); 
+        }, 4000); 
       };
   
       loadData();
