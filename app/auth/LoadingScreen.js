@@ -7,12 +7,12 @@ const LoadingScreen = () => {
     const router = useRouter(); // Use expo-router's router
 
     useEffect(() => {
-        // Simulate a task or data fetch
+        // Simulate a task or data fetch (pero char2 pane kai wapamai i fetch na data so change upon requiremnts)
         const loadData = async () => {
             setTimeout(() => {
-                setLoading(false); // Stop loading after the task is done
-                router.replace('auth/LandingPage'); // Navigate to LandingPage
-            }, 4000); // Mocking a delay of 4 seconds
+                setLoading(false); 
+                router.replace('auth/LandingPage'); 
+            }, 4000); 
         };
 
         loadData();
@@ -22,7 +22,6 @@ const LoadingScreen = () => {
         <View style={styles.container}>
             <Image
                 source={require('../assets/logo.png')}
-                // Correct relative path from app/auth
                 style={styles.logo}
                 resizeMode="contain"
             />
@@ -36,16 +35,16 @@ export default LoadingScreen;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center', // Center items vertically
-        alignItems: 'center', // Center items horizontally
+        justifyContent: 'center', 
+        alignItems: 'center', 
         backgroundColor: '#fff',
     },
     logo: {
         width: 250,
         height: 250,
-        marginBottom: 20, // Adds space between the logo and the loading spinner
+        marginBottom: 20, 
     },
     loading: {
-        marginTop: 20, // This keeps the ActivityIndicator below the logo
+        marginTop: 20, 
     },
 });

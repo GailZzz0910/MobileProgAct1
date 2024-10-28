@@ -41,7 +41,7 @@
     "@babel/core": "^7.20.0"
   },
   "private": true,
-  "description": "",
+  "description": "MONGO_URI=<your_mongo_uri_here>\r PORT=<your_port_here>\r JWT_SECRET=<your_jwt_secret_here>\r NODE_ENV=development\r MAILTRAP_TOKEN=<your_mailtrap_token_here>\r MAILTRAP_ENDPOINT=<your_mailtrap_endpoint_here>",
   "keywords": [],
   "author": "",
   "license": "ISC"
