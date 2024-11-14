@@ -60,6 +60,7 @@ const LoginScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: 'rgba(245, 245, 245, 0.90)', 
   },
   imageBackground: {
     flex: 1,
