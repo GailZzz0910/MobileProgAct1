@@ -13,7 +13,7 @@ export default function Layout() {
       <Tabs.Screen
         name="home"
         options={{
-          tabBarLabel: "home",
+          tabBarLabel: "Dashboard",
           tabBarLabelStyle: { color: "#1F5676"},
           headerShown: false,
           tabBarIcon: ({ focused }) =>
